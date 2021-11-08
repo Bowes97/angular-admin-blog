@@ -1,0 +1,19 @@
+{
+  "blogs": [
+    {
+      "title": "Pizza time",
+      "postedBy": "Ivan Ivanov",
+      "text": "Hello world",
+      "imagePath": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKVSb4CHkO5FFvvfwhIwG_UpIl7s2NvAIyg&usqp=CAU",
+      "date": "2021-11-05T14:49:44.450Z",
+      "id": 1
+    }
+  ],
+  "categorys": [
+    {
+      "name": "Burger",
+      "id": 2
+    }
+  ],
+  "products": []
+}

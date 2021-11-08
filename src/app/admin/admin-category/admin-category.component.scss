@@ -1,0 +1,45 @@
+.header{ 
+    background-color: rgb(224, 223, 223);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 3%;
+    button{
+        width: 150px;
+    }
+    p{
+        margin: 0;
+    }
+}
+.card{
+    
+    .footer{
+        width: 95%;
+        margin: auto;
+        input{
+            margin: 1% 0;
+        }
+    }
+}
+th{
+    background-color: rgb(224, 223, 223);
+    border: 1px solid grey;
+}
+td{
+   width: 5%; 
+   border: 1px solid grey;
+}
+td:nth-child(2){
+    width: 85%;
+}
+.buttonsDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+        color: #fff;
+        height: 80%;
+        width: 80%;
+        margin: 0 5px;
+    }
+}

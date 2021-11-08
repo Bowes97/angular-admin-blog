@@ -1,0 +1,32 @@
+<form [formGroup]="blogsForm" (submit)="saveDiscount()">
+    <input style="margin: 0% 0 2% 0;" class="form-control" type="text" placeholder="Title here..."
+        aria-label="default input example" formControlName="title">
+    <textarea class="form-control" rows="6" placeholder="Text here..." formControlName="text"></textarea>
+    <input style="margin: 2% 0;" class="form-control" type="text" placeholder="autor here..."
+        aria-label="default input example" formControlName="postedBy">
+    <input type="submit" value="Add" class="btn btn-dark" [disabled]="blogsForm.invalid">
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Text</th>
+            <th scope="col">Date</th>
+            <th scope="col">Author</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let b of adminBlogs">
+            <td style="font-weight: bold;">{{b.id}}</td>
+            <td>{{b.title | slice:0:50}}</td>
+            <td>{{b.text}} ...</td>
+            <td>{{b.date | date:"short"}}</td>
+            <td>{{b.postedBy | uppercase}}</td>
+            <td><button class="btn btn-dark" (click)="editBlogs(b)" data-bs-toggle="modal" data-bs-target="#discountModal">edit</button>
+            </td><td><button class="btn btn-dark" (click)="deleteBlogs(b)">delete</button></td>
+        </tr>
+    </tbody>
+</table>

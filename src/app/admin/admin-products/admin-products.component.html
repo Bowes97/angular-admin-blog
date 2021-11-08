@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="header">
+        <p>Products</p>
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addProductModal">Add</button>
+    </div>
+    <div class="footer">
+        <input type="text" class="form-control" placeholder="filter products.." [(ngModel)]="filter" name="filter" >
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of adminProducts | searchProduct:filter">
+                    <td style="font-weight: bold;">{{p.id}}</td>
+                    <td>{{ p.category.name}}</td>
+                    <td>{{p.name | titlecase}}</td>
+                    <td>{{p.description}}</td>
+                    <td>{{p.price | currency:'UAH':'symbol-narrow' }}</td>
+                    <td>
+                        <img [src]="p.imagePath" alt="" width="100px">
+                    </td>
+                    <td>
+                        <button class="btn btn-dark" (click)="editProduct(p)" data-bs-toggle="modal"
+                            data-bs-target="#addProductModal">edit</button>
+                    </td>
+                    <td><button class="btn btn-dark" data-bs-toggle="modal"
+                            data-bs-target="#deleteProductModal">delete</button>
+                    </td>
+
+                    <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body buttonsDelete">
+                                    <button class="btn btn-dark" data-bs-dismiss="modal">Dismiss</button>
+                                    <button class="btn btn-danger" (click)="deleteProduct(p)"
+                                        data-bs-dismiss="modal">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="modal-body" [formGroup]="productForm">
+                <div class="form">
+                    <span>Category:</span>
+                    <select  class="form-control" formControlName="category" id="">
+                        <option [ngValue]="category" *ngFor="let category of adminCategorys">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <span>Name:</span>
+                    <input type="text" class="form-control mt-3" formControlName="name" [(ngModel)]="field" name="field">
+                </div>
+                <div class="form">
+                    <span>Description:</span>
+                    <textarea class="form-control mt-3" cols="30" rows="4" formControlName="description" [(ngModel)]="field1" name="field1"></textarea>
+                </div>
+                <div class="form">
+                    <span>Price:</span>
+                    <input class="form-control mt-3" type="text" formControlName="price" [(ngModel)]="field2" name="field2">
+                </div>
+                <input class="form-control mt-3" *ngIf="!isUploaded" type="file" (change)="upload($event)">
+                <ng-container *ngIf="isUploaded">
+                    <div class="file mt-3">
+                        <img [src]="valueByControl('imagePath')" alt="" width="120px">
+                        <button type="button" class="btn btn-dark" (click)="deleteImage()">delete</button>
+                    </div>
+                    
+                </ng-container>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="saveProduct()"
+                    [disabled]="productForm.invalid">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

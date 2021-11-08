@@ -1,0 +1,15 @@
+<div class="container-fluid mt-3">
+    <div class="d-flex align-items-start">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="width: 10%;">
+            <button style="color: black;" class="nav-link" type="button" [routerLink]="[ 'admin-category' ]"
+                routerLinkActive="active">Category</button>
+            <button style="color: black;" class="nav-link" type="button" [routerLink]="[ 'admin-products' ]"
+                routerLinkActive="active">Products</button>
+            <button style="color: black;" class="nav-link" type="button" [routerLink]="[ 'admin-blogs' ]"
+                routerLinkActive="active">Blogs</button>
+        </div>
+        <div class="tab-content" style="width: 90%;" >
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

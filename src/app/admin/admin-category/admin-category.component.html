@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="header">
+    <p>Category</p>
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+  </div>
+  <div class="footer">
+    <input type="text" class="form-control" placeholder="filter category.." [(ngModel)]="filter" name="filter">
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of adminCategorys | searchCategory:filter">
+          <td style="font-weight: bold;">{{c.id}}</td>
+          <td>{{c.name | titlecase}}</td>
+          <td>
+            <button class="btn btn-dark" (click)="editBlogs(c)" data-bs-toggle="modal"
+              data-bs-target="#addModal">edit</button>
+          </td>
+          <td><button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</button></td>
+
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body buttonsDelete">
+                  <button class="btn btn-dark" data-bs-dismiss="modal">Dismiss</button>
+                  <button class="btn btn-danger" (click)="deleteBlogs(c)" data-bs-dismiss="modal">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="modal-body" [formGroup]="categoryForm">
+        <input type="text" placeholder="name here..." class="form-control" formControlName="name" [(ngModel)]="field" name="field">
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="saveCategory()"
+          [disabled]="categoryForm.invalid">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
